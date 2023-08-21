@@ -1,0 +1,24 @@
+# This Action builds a Docker image using Docker Mendix Buildpack https://github.com/mendix/docker-mendix-buildpack/tree/latest.
+# The Docker image is then pushed to a container registry.
+
+name: On push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sigridci:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Download and extract docker-mendix-buildpack
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: "mendix/docker-mendix-buildpack"
+          tag: "v5.0.2"
+          tarBall: true
+          extract: true
+      - name: check the downloaded artifacts
+        run: ls -al ${{ github.workspace }}
