@@ -27,9 +27,8 @@ jobs:
       - name: Build using docker-mendix-buildpack
         run: >
           docker build
-          --build-arg
-          BUILD_PATH=${{ github.workspace }}/app
-          ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app
-          BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder
+          --build-arg BUILD_PATH=${{ github.workspace }}/app
+          --build-arg ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app
+          --build-arg BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder
           --tag aldidoanta/mendix-ids-connector:1.0
           .
