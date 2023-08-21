@@ -8,11 +8,13 @@ on:
       - main
 
 jobs:
-  sigridci:
+  build-and-push:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          path: app
       - name: Download and extract docker-mendix-buildpack
         uses: robinraju/release-downloader@v1.8
         with:
@@ -20,5 +22,15 @@ jobs:
           tag: "v5.0.2"
           tarBall: true
           extract: true
-      - name: check the downloaded artifacts
-        run: ls -al ${{ github.workspace }}
+      - name: Check the downloaded mendix-buildpack
+        run: cd mendix-docker-mendix-buildpack-38f09bd && ls -al
+      - name: Build using docker-mendix-buildpack
+        run: |
+          docker build \
+          --build-arg \
+          BUILD_PATH=${{ github.workspace }}/app \
+          ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app \
+          BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder \
+          --tag aldidoanta/mendix-ids-connector:1.0 \
+          .
+        
