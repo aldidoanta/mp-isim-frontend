@@ -21,13 +21,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          path: project
-      - name: Move the `project` directory to the build context, then build using docker-mendix-buildpack
+          path: ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd
+      - name: Build using docker-mendix-buildpack
         run: >
-          mv ${{ github.workspace }}/project ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd && docker build
-          --build-arg BUILD_PATH=${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd/project
-          --build-arg ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app
-          --build-arg BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder
-          --tag aldidoanta/mendix-ids-connector:1.0
-          ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd
+          ls -al ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd
+          # docker build
+          # --build-arg BUILD_PATH=${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd/project
+          # --build-arg ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app
+          # --build-arg BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder
+          # --tag aldidoanta/mendix-ids-connector:1.0
+          # ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd
 
