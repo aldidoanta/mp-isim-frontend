@@ -22,6 +22,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd/project
+      - name: Check dirs
+        run: |
+          ls -al ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd
+          ls -al ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd/project
       - name: Build using docker-mendix-buildpack
         run: >
           docker build
