@@ -22,8 +22,8 @@ jobs:
           tag: "v5.0.2"
           tarBall: true
           extract: true
-      - name: Check the downloaded mendix-buildpack
-        run: cd mendix-docker-mendix-buildpack-38f09bd && ls -al
+      - name: Check the working directory
+        run: ls -al
       - name: Build using docker-mendix-buildpack
         run: >
           docker build
@@ -31,4 +31,4 @@ jobs:
           --build-arg ROOTFS_IMAGE=aldidoanta/mendix-rootfs:app
           --build-arg BUILDER_ROOTFS_IMAGE=aldidoanta/mendix-rootfs:builder
           --tag aldidoanta/mendix-ids-connector:1.0
-          .
+          ${{ github.workspace }}/mendix-docker-mendix-buildpack-38f09bd/
