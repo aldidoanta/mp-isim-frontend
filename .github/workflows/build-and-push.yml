@@ -1,7 +1,7 @@
 # This Action builds a Docker image using Docker Mendix Buildpack https://github.com/mendix/docker-mendix-buildpack/tree/latest.
 # The Docker image is then pushed to Docker Hub, a container registry.
 
-name: On push to the main branch
+name: Build and push image
 on:
   push:
     branches:
